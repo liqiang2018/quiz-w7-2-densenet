@@ -74,16 +74,19 @@ def densenet(images, num_classes=1001, is_training=False,
             net = slim.conv2d(net, 2 * growth, 7, stride=2, scope='conv1')
             net = slim.max_pool2d(net, 3, stride=2, padding='SAME', scope='pool1')
 
-            net = block(net, 6, growth, scope='block1')
+            #net = block(net, 6, growth, scope='block1')
+            net = block(net, 2, growth, scope='block1')
             net = transition(net, reduce_dim(net), scope='transition1')
 
-            net = block(net, 12, growth, scope='block2')
+            #net = block(net, 12, growth, scope='block2')
+            net = block(net, 4, growth, scope='block2')
             net = transition(net, reduce_dim(net), scope='transition2')
 
-            net = block(net, 24, growth, scope='block3')
-            net = transition(net, reduce_dim(net), scope='transition3')
+            #net = block(net, 24, growth, scope='block3')
+            #net = transition(net, reduce_dim(net), scope='transition3')
 
-            net = block(net, 16, growth, scope='block4')
+            #net = block(net, 16, growth, scope='block4')
+            net = block(net, 6, growth, scope='block3')
             net = slim.batch_norm(net, scope='last_batch_norm_relu')
             net = tf.nn.relu(net)
 
